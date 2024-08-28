@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-DesafioLocadoraApplication<desafio-locadora>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.desafio_locadora.DesafioLocadoraApplication",
+            "projectName": "desafio-locadora",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DesafioLocadoraApplication<desafio-locadora>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.DesafioLocadoraApplication",
+            "projectName": "desafio-locadora",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
