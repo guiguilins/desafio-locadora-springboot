@@ -1,6 +1,6 @@
 package com.example.domain.entity;
 
-import com.example.api.dto.CarroRequestDTO;
+import com.example.api.dtos.CarroRequestDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

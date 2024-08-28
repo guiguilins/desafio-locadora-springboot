@@ -1,0 +1,15 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Ignora diretórios e arquivos gerados pelo IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# Ignora arquivos de configuração e de cache do IntelliJ
+out/
+.idea_modules/
+
+# Ignora arquivos de configuração específicos do projeto
+*.ipr
+*.class
