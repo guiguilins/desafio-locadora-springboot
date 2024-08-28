@@ -1,4 +1,4 @@
-package com.example.api.dto;
+package com.example.api.dtos;
 
 import java.math.BigDecimal;
 
