@@ -9,7 +9,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-@Table(name = "funcionario")
 public class FuncionarioModel extends PessoaModel {
 
     @NotBlank
