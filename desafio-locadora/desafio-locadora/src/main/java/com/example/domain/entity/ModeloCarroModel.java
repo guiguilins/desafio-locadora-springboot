@@ -2,6 +2,7 @@ package com.example.domain.entity;
 
 import com.example.domain.enums.Categoria;
 import jakarta.persistence.*;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
