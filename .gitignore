@@ -30,3 +30,6 @@
 # Ignorar logs de crash da máquina virtual Java
 hs_err_pid*
 replay_pid*
+
+### VS Code ###
+.vscode/
