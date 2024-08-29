@@ -19,9 +19,6 @@ import lombok.AllArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "motorista")
 public class MotoristaModel extends PessoaModel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     private String numeroCNH;
 
