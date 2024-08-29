@@ -12,7 +12,7 @@ public class MotoristaMapper {
     @Autowired
     private ModelMapper modelMapper;
 
-    public MotoristaDTO convertToCarroDTO(MotoristaModel motoristaModel){
+    public MotoristaDTO convertToMotoristaDTO(MotoristaModel motoristaModel){
         return modelMapper.map(motoristaModel, MotoristaDTO.class);
     }
 }
