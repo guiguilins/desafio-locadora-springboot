@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 public class MotoristaServiceImpl implements CreateObject {
     @Autowired
     MotoristaRepository motoristaRepository;
+
     @Override
     public MotoristaModel createMotorista(MotoristaModel motoristaModel) {
         MotoristaModel motoristaSave = this.motoristaRepository.save(motoristaModel);
