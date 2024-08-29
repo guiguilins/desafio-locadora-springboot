@@ -26,10 +26,17 @@ public class AluguelModel {
     @ManyToOne
     private CarroModel carro;
 
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "apolice_id", referencedColumnName = "id")
+    private ApoliceSeguroModel apolice;
+
+
     public AluguelModel(AluguelRequestDTO data) {
         this.dataPedido = data.dataPedido();
         this.dataEntrega = data.dataEntrega();
         this.dataDevolucao = data.dataDevolucao();
         this.valorTotal = data.valorTotal();
+        this.apolice = new ApoliceSeguroModel(data.apoliceRequestDTO());
     }
 }
