@@ -6,8 +6,8 @@ import java.util.Date;
 
 import com.example.api.dtos.AluguelRequestDTO;
 
-import com.example.api.dtos.ApoliceSeguroRequestDTO;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
@@ -19,19 +19,25 @@ public class AluguelModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotNull
     private Calendar dataPedido;
+
+    @NotNull
     private Date dataEntrega;
+
+    @NotNull
     private Date dataDevolucao;
+
+    @NotNull
     private BigDecimal valorTotal;
 
     @ManyToOne
     private CarroModel carro;
 
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "apolice_id", referencedColumnName = "id")
     private ApoliceSeguroModel apolice;
-
 
     public AluguelModel(AluguelRequestDTO data) {
         this.dataPedido = data.dataPedido();
