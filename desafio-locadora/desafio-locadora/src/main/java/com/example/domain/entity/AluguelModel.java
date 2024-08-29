@@ -6,6 +6,7 @@ import java.util.Date;
 
 import com.example.api.dtos.AluguelRequestDTO;
 
+import com.example.api.dtos.ApoliceSeguroRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -37,6 +38,6 @@ public class AluguelModel {
         this.dataEntrega = data.dataEntrega();
         this.dataDevolucao = data.dataDevolucao();
         this.valorTotal = data.valorTotal();
-        this.apolice = new ApoliceSeguroModel(data.apoliceRequestDTO());
+        this.apolice = data.apolice();
     }
 }
