@@ -2,6 +2,7 @@ package com.example.domain.entity;
 
 import java.math.BigDecimal;
 
+import com.example.api.dtos.ApoliceSeguroRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 

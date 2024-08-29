@@ -5,9 +5,10 @@ import java.util.Calendar;
 import java.util.Date;
 
 import com.example.domain.entity.AluguelModel;
+import com.example.domain.entity.ApoliceSeguroModel;
 
-public record AluguelDTO(Calendar dataPedido, Date dataEntrega, Date dataDevolucao, BigDecimal valorTotal) {
+public record AluguelDTO(Calendar dataPedido, Date dataEntrega, Date dataDevolucao, BigDecimal valorTotal, ApoliceSeguroModel apolice) {
     public AluguelDTO(AluguelModel aluguel) {
-        this(aluguel.getDataPedido(), aluguel.getDataEntrega(), aluguel.getDataDevolucao(), aluguel.getValorTotal());
+        this(aluguel.getDataPedido(), aluguel.getDataEntrega(), aluguel.getDataDevolucao(), aluguel.getValorTotal(), aluguel.getApolice());
     }
 }
