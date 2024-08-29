@@ -6,11 +6,7 @@ import java.util.Date;
 
 import com.example.api.dtos.AluguelRequestDTO;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -26,6 +22,9 @@ public class AluguelModel {
     private Date dataEntrega;
     private Date dataDevolucao;
     private BigDecimal valorTotal;
+
+    @ManyToOne
+    private CarroModel carro;
 
     public AluguelModel(AluguelRequestDTO data) {
         this.dataPedido = data.dataPedido();
