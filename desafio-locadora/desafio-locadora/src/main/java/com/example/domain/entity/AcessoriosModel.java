@@ -20,9 +20,4 @@ public class AcessoriosModel {
 
     @NotBlank
     private String acessorios;
-
-    @ManyToMany(mappedBy = "acessorios")
-    private List<CarroModel> carro;
-
-
 }

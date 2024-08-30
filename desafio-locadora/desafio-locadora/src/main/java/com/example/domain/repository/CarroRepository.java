@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CarroInterface extends JpaRepository<CarroModel,Long> {
+public interface CarroRepository extends JpaRepository<CarroModel,Long> {
 }
