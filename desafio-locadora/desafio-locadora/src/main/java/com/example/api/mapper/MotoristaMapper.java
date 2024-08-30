@@ -13,6 +13,12 @@ public class MotoristaMapper {
     private ModelMapper modelMapper;
 
     public MotoristaDTO convertToMotoristaDTO(MotoristaModel motoristaModel){
-        return modelMapper.map(motoristaModel, MotoristaDTO.class);
+        return new MotoristaDTO(
+                motoristaModel.getNome(),
+                motoristaModel.getCpf(),
+                motoristaModel.getDataNascimento(),
+                motoristaModel.getSexo(),
+                motoristaModel.getNumeroCNH()
+        );
     }
 }
