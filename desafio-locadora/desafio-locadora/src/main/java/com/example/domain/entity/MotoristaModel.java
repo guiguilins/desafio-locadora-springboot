@@ -23,7 +23,7 @@ public class MotoristaModel extends PessoaModel {
     private String numeroCNH;
 
     public MotoristaModel(MotoristaRequestDTO data) {
-        super(new PessoaRequestDTO(data.nome(), data.cpf(), data.dataNascimente(), data.sexo()));
+        super(new PessoaRequestDTO(data.nome(), data.cpf(), data.dataNascimento(), data.sexo()));
         this.numeroCNH = data.numeroCNH();
     }
 }

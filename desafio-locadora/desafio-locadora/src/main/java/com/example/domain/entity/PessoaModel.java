@@ -2,6 +2,7 @@ package com.example.domain.entity;
 
 import com.example.api.dtos.PessoaRequestDTO;
 import com.example.domain.enums.Sexo;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -29,6 +30,7 @@ public class PessoaModel {
     @NotBlank
     private String cpf;
     @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dataNascimento;
     @NotNull
     @Enumerated
@@ -37,7 +39,7 @@ public class PessoaModel {
     public PessoaModel(PessoaRequestDTO data) {
         this.nome = data.nome();
         this.cpf = data.cpf();
-        this.dataNascimento = data.dataNascimente();
+        this.dataNascimento = data.dataNascimento();
         this.sexo = data.sexo();
     }
 }
