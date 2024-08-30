@@ -41,7 +41,7 @@ public class CarroModel {
             joinColumns = @JoinColumn(name = "carro_id"),
             inverseJoinColumns = @JoinColumn(name = "acessorio_id")
     )
-    private List<AcessoriosModel> acessorios = new ArrayList<>();
+    private List<AcessorioModel> acessorios = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "modelo_id")

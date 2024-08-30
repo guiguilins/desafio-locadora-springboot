@@ -62,10 +62,10 @@ public class TestConfig implements CommandLineRunner {
 
         modeloCarroRepository.saveAll(Arrays.asList(corolla, civic));
 
-        AcessoriosModel arCondicionado = new AcessoriosModel();
+        AcessorioModel arCondicionado = new AcessorioModel();
         arCondicionado.setAcessorios("Ar-condicionado");
 
-        AcessoriosModel direcaoHidraulica = new AcessoriosModel();
+        AcessorioModel direcaoHidraulica = new AcessorioModel();
         direcaoHidraulica.setAcessorios("Direção hidráulica");
 
         acessorioRepository.saveAll(Arrays.asList(arCondicionado, direcaoHidraulica));

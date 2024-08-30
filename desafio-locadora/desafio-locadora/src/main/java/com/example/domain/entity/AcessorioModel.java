@@ -1,5 +1,7 @@
 package com.example.domain.entity;
 
+import com.example.api.dtos.AcessorioRequestDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -13,11 +15,19 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "acessorios")
-public class AcessoriosModel {
+public class AcessorioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
     private String acessorios;
+
+    @ManyToMany(mappedBy = "acessorios")
+    @JsonIgnore
+    private List<CarroModel> carros;
+
+    public AcessorioModel(AcessorioRequestDTO data) {
+        this.acessorios = data.acessorio();
+    }
 }
