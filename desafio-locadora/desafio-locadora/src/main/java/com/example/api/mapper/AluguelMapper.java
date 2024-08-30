@@ -14,6 +14,14 @@ public class AluguelMapper {
     private ModelMapper modelMapper;
 
     public AluguelDTO convertToAluguelDTO (AluguelModel aluguelModel) {
-        return modelMapper.map(aluguelModel, AluguelDTO.class);
+        return new AluguelDTO(
+            aluguelModel.getDataPedido(),
+            aluguelModel.getDataEntrega(),
+            aluguelModel.getDataDevolucao(),
+            aluguelModel.getValorTotal(),
+            aluguelModel.getCarro(),
+            aluguelModel.getApolice(),
+            aluguelModel.getMotorista()
+        );
     }
 }

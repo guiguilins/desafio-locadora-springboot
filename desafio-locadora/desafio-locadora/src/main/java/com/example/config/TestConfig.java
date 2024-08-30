@@ -3,6 +3,7 @@ package com.example.config;
 import com.example.domain.entity.*;
 import com.example.domain.enums.Categoria;
 import com.example.domain.repository.AcessorioRepository;
+import com.example.domain.repository.AluguelRepository;
 import com.example.domain.repository.CarroRepository;
 import com.example.domain.repository.FabricanteRepository;
 import com.example.domain.repository.ModeloCarroRepository;
@@ -13,6 +14,8 @@ import org.springframework.context.annotation.Profile;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Configuration
@@ -30,6 +33,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     AcessorioRepository acessorioRepository;
+
+    @Autowired
+    AluguelRepository aluguelRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -82,5 +88,18 @@ public class TestConfig implements CommandLineRunner {
 
         List<CarroModel> carros = Arrays.asList(carro1, carro2);
         carroRepository.saveAll(carros);
+
+        AluguelModel aluguel1 = new AluguelModel();
+        Calendar dataPedido = Calendar.getInstance();
+        dataPedido.set(2024, Calendar.AUGUST, 30);
+        aluguel1.setDataPedido(dataPedido);
+        aluguel1.setDataEntrega(new Date());
+        aluguel1.setDataDevolucao(new Date());
+        aluguel1.setCarro(carro1);
+        aluguel1.setMotorista(null);
+        aluguel1.setValorTotal(new BigDecimal("150.00"));
+        aluguel1.setApolice(null);
+
+        aluguelRepository.saveAll(Arrays.asList(aluguel1));
     }
 }
