@@ -8,6 +8,7 @@ import com.example.domain.entity.AcessorioModel;
 import com.example.domain.entity.CarroModel;
 import com.example.domain.entity.FabricanteModel;
 import com.example.domain.entity.ModeloCarroModel;
+import com.example.domain.enums.Categoria;
 import com.example.domain.repository.AcessorioRepository;
 import com.example.domain.repository.CarroRepository;
 import com.example.domain.repository.FabricanteRepository;
@@ -81,6 +82,19 @@ public class CarroServiceImpl implements CarroService {
         return carros.stream()
                 .map(carroMapper::convertToCarroDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CarroModel> filtrarCarros(Categoria categoria, List<Long> acessoriosIds) {
+        if (categoria != null && acessoriosIds != null && !acessoriosIds.isEmpty()) {
+            return carroRepository.findByAcessorios(acessoriosIds, acessoriosIds.size());
+        } else if (categoria != null) {
+            return carroRepository.findByModeloCategoria(categoria);
+        } else if (acessoriosIds != null && !acessoriosIds.isEmpty()) {
+            return carroRepository.findByAcessorios(acessoriosIds, acessoriosIds.size());
+        } else {
+            return carroRepository.findAll();
+        }
     }
 
 }
