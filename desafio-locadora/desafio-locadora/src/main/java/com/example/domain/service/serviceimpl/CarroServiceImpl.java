@@ -6,16 +6,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.example.api.dtos.CarroDisponivelDTO;
+import com.example.domain.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.api.dtos.CarroDTO;
 import com.example.api.dtos.CarroRequestDTO;
 import com.example.api.mapper.CarroMapper;
-import com.example.domain.entity.AcessorioModel;
-import com.example.domain.entity.CarroModel;
-import com.example.domain.entity.FabricanteModel;
-import com.example.domain.entity.ModeloCarroModel;
 import com.example.domain.enums.Categoria;
 import com.example.domain.repository.AcessorioRepository;
 import com.example.domain.repository.CarroRepository;
@@ -40,7 +37,6 @@ public class CarroServiceImpl implements CarroService {
 
     @Autowired
     private FabricanteRepository fabricanteRepository;
-
 
     @Override
     public CarroModel salvarCarro(CarroRequestDTO data) {
@@ -87,6 +83,7 @@ public class CarroServiceImpl implements CarroService {
 
     @Override
     public List<CarroModel> filtrarCarros(Categoria categoria, List<Long> acessoriosIds) {
+        carroMapper.convertToCarroDTO(new CarroModel());
         if (categoria != null && acessoriosIds != null && !acessoriosIds.isEmpty()) {
             return carroRepository.findByAcessorios(acessoriosIds, acessoriosIds.size());
         } else if (categoria != null) {
@@ -107,9 +104,13 @@ public class CarroServiceImpl implements CarroService {
         }
 
     @Override
-    public void excluirPorId(Long id) {
-        carroRepository.deleteById(id);
+    public CarroDTO deletarPorChassi(CarroDTO carroDTO) {
+        CarroModel motoristaExistente = carroRepository.findByChassi(carroDTO.chassi())
+                .orElseThrow(() -> new RuntimeException("Motorista não encontrado com o CPF: " + carroDTO.chassi()));
+        carroRepository.delete(motoristaExistente);
+        return carroMapper.convertToCarroDTO(motoristaExistente);
     }
+
 
 }
 

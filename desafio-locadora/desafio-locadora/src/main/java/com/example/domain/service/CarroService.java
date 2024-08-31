@@ -18,7 +18,7 @@ public interface CarroService {
 
     public List<CarroDisponivelDTO> listarCarrosDisponiveisParaAluguel(String fabricante, String modelo, Categoria categoria, List<Long> acessorios);
 
-    public void excluirPorId(Long id);
+    public CarroDTO deletarPorChassi(CarroDTO carroDTO);
 
 
 }

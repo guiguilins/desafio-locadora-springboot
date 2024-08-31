@@ -1,8 +1,11 @@
 package com.example.api.mapper;
 
+import com.example.api.dtos.AcessorioDTO;
 import com.example.api.dtos.CarroDTO;
 import com.example.domain.entity.CarroModel;
 import org.springframework.stereotype.Component;
+
+import java.util.stream.Collectors;
 
 @Component
 public class CarroMapper {
@@ -13,7 +16,7 @@ public class CarroMapper {
                 carroModel.getChassi(),
                 carroModel.getCor(),
                 carroModel.getValorDiaria(),
-                carroModel.getAcessorios(),
+                carroModel.getAcessorios().stream().map(AcessorioDTO::new).collect(Collectors.toList()),
                 carroModel.getModelo(),
                 carroModel.getAlugueis());
     }
