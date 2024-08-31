@@ -1,9 +1,11 @@
 package com.example.domain.service.serviceimpl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.example.api.dtos.CarroDisponivelDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ import com.example.domain.entity.AcessorioModel;
 import com.example.domain.entity.CarroModel;
 import com.example.domain.entity.FabricanteModel;
 import com.example.domain.entity.ModeloCarroModel;
+import com.example.domain.enums.Categoria;
 import com.example.domain.repository.AcessorioRepository;
 import com.example.domain.repository.CarroRepository;
 import com.example.domain.repository.FabricanteRepository;
@@ -42,27 +45,27 @@ public class CarroServiceImpl implements CarroService {
     @Override
     public CarroModel salvarCarro(CarroRequestDTO data) {
 
-        FabricanteModel fabricante = new FabricanteModel();
-        fabricante.setNome(data.modelo().getFabricante().getNome());
-
-        fabricante = fabricanteRepository.save(fabricante);
+        FabricanteModel fabricante = fabricanteRepository.findById(data.modelo().getFabricante().getId())
+                .orElseGet(() -> {
+                    FabricanteModel novoFabricante = new FabricanteModel();
+                    novoFabricante.setNome(data.modelo().getFabricante().getNome());
+                    return fabricanteRepository.save(novoFabricante);
+                });
 
         ModeloCarroModel modelo = new ModeloCarroModel();
         modelo.setDescricao(data.modelo().getDescricao());
         modelo.setCategoria(data.modelo().getCategoria());
         modelo.setFabricante(fabricante);
-
         modelo = modeloCarroRepository.save(modelo);
 
-        List<AcessorioModel> acessorios = new ArrayList<>();
-        for (AcessorioModel acessorioModel: data.acessorios()) {
-            AcessorioModel acessorio = new AcessorioModel();
-            acessorio.setAcessorios(acessorioModel.getAcessorios());
-
-            acessorio = acessorioRepository.save(acessorio);
-
-            acessorios.add(acessorio);
-        }
+        List<AcessorioModel> acessorios = data.acessorios().stream()
+                .map(acessorioModel -> {
+                    AcessorioModel acessorio = new AcessorioModel();
+                    acessorio.setAcessorios(acessorioModel.getAcessorios());
+                    return acessorio;
+                })
+                .collect(Collectors.toList());
+        acessorioRepository.saveAll(acessorios);
 
         CarroModel carro = new CarroModel();
         carro.setPlaca(data.placa());
@@ -82,4 +85,32 @@ public class CarroServiceImpl implements CarroService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<CarroModel> filtrarCarros(Categoria categoria, List<Long> acessoriosIds) {
+        if (categoria != null && acessoriosIds != null && !acessoriosIds.isEmpty()) {
+            return carroRepository.findByAcessorios(acessoriosIds, acessoriosIds.size());
+        } else if (categoria != null) {
+            return carroRepository.findByModeloCategoria(categoria);
+        } else if (acessoriosIds != null && !acessoriosIds.isEmpty()) {
+            return carroRepository.findByAcessorios(acessoriosIds, acessoriosIds.size());
+        } else {
+            return carroRepository.findAll();
+        }
+    }
+
+    @Override
+    public List<CarroDisponivelDTO> listarCarrosDisponiveisParaAluguel(String fabricante, String modelo, Categoria categoria, List<Long> acessorios) {
+        List<CarroModel> carrosDisponiveis = carroRepository.findCarrosDisponiveis(fabricante, modelo, categoria, acessorios);
+        return carrosDisponiveis.stream()
+                .map(CarroDisponivelDTO::new)
+                .collect(Collectors.toList());
+        }
+
+    @Override
+    public void excluirPorId(Long id) {
+        carroRepository.deleteById(id);
+    }
+
 }
+
+
