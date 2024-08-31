@@ -29,4 +29,12 @@ public class AluguelServiceImpl implements AluguelService {
                 .map(aluguelMapper::convertToAluguelDTO)
                 .collect(Collectors.toList());
     }
+
+    public void deletarAluguel(Long id) {
+        if (aluguelRepository.findById(id).isEmpty()) {
+            throw new RuntimeException();
+        }
+
+        aluguelRepository.deleteById(id);
+    }
 }

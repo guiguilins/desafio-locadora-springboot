@@ -6,4 +6,6 @@ import com.example.api.dtos.AluguelDTO;
 
 public interface AluguelService {
     public List<AluguelDTO> listarAlugueis();
+
+    public void deletarAluguel(Long id);
 }
