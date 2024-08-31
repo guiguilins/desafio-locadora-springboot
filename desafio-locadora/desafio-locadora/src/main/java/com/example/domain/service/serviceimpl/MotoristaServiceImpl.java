@@ -34,4 +34,34 @@ public class MotoristaServiceImpl implements MotoristaService {
                 .map(motoristaMapper::convertToMotoristaDTO)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public MotoristaDTO updateMotorista(MotoristaDTO motoristaDTO) {
+        MotoristaModel motoristaExistente = motoristaRepository.findByCpf(motoristaDTO.cpf())
+                .orElseThrow(() -> new RuntimeException("Motorista não encontrado com o CPF: " + motoristaDTO.cpf()));
+
+        if (motoristaDTO.nome() != null && !motoristaDTO.nome().isEmpty()) {
+            motoristaExistente.setNome(motoristaDTO.nome());
+        }
+        if (motoristaDTO.dataNascimento() != null) {
+            motoristaExistente.setDataNascimento(motoristaDTO.dataNascimento());
+        }
+        if (motoristaDTO.sexo() != null) {
+            motoristaExistente.setSexo(motoristaDTO.sexo());
+        }
+        if (motoristaDTO.cnh() != null && !motoristaDTO.cnh().isEmpty()) {
+            motoristaExistente.setNumeroCNH(motoristaDTO.cnh());
+        }
+        MotoristaModel motoristaAtualizado = motoristaRepository.save(motoristaExistente);
+
+        return motoristaMapper.convertToMotoristaDTO(motoristaAtualizado);
+    }
+
+    @Override
+    public MotoristaDTO deleteMotorista(MotoristaDTO motoristaDTO) {
+        MotoristaModel motoristaExistente = motoristaRepository.findByCpf(motoristaDTO.cpf())
+                .orElseThrow(() -> new RuntimeException("Motorista não encontrado com o CPF: " + motoristaDTO.cpf()));
+        motoristaRepository.delete(motoristaExistente);
+        return motoristaMapper.convertToMotoristaDTO(motoristaExistente);
+    }
 }

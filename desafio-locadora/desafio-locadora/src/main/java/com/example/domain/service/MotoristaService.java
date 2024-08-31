@@ -7,5 +7,10 @@ import java.util.List;
 
 public interface MotoristaService {
     public MotoristaModel createMotorista(MotoristaModel motorista);
+
     public List<MotoristaDTO> listarMotoristas();
+
+    public MotoristaDTO updateMotorista(MotoristaDTO motoristaDTO);
+
+    public MotoristaDTO deleteMotorista(MotoristaDTO motoristaDTO);
 }
