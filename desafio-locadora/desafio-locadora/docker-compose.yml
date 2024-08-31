@@ -1,0 +1,37 @@
+services:
+  locadora-db:
+    image: mysql:latest
+    container_name: estagio-mysql
+    environment: 
+      MYSQL_ROOT_PASSWORD: 'e7y2349ysdf'
+      MYSQL_DATABASE: 'locadora-carros'
+      MYSQL_USER: 'carros'
+      MYSQL_PASSWORD: 'x97gasdqa123'
+      MYSQL_HOST_AUTH_METHOD: trust
+    ports:
+      - '2111:3306'
+    # expose:
+    #  - '1040'
+    volumes:
+      - locadora-db:/var/lib/mysql
+    restart: unless-stopped
+
+
+  app:
+    depends_on:
+      - locadora-db
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: locadora
+    links:
+      - locadora-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://locadora-db:3306/locadora-carros
+      SPRING_DATASOURCE_USERNAME: carros
+      SPRING_DATASOURCE_PASSWORD: x97gasdqa123
+    ports:
+      - '9120:2980'
+
+volumes:
+  locadora-db:

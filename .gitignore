@@ -33,3 +33,12 @@ replay_pid*
 
 ### VS Code ###
 .vscode/
+desafio-locadora/desafio-locadora/target/classes/META-INF/maven/com.example/desafio-locadora/pom.properties
+desafio-locadora/desafio-locadora/target/classes/META-INF/MANIFEST.MF
+desafio-locadora/desafio-locadora/.settings/org.springframework.ide.eclipse.prefs
+desafio-locadora/desafio-locadora/.settings/org.eclipse.jdt.core.prefs
+desafio-locadora/desafio-locadora/.settings/org.eclipse.jdt.apt.core.prefs
+desafio-locadora/desafio-locadora/.settings/org.eclipse.core.resources.prefs
+desafio-locadora/desafio-locadora/.project
+desafio-locadora/desafio-locadora/.factorypath
+desafio-locadora/desafio-locadora/.classpath
