@@ -5,7 +5,6 @@ import com.example.api.dtos.CarroDisponivelDTO;
 import com.example.api.dtos.CarroRequestDTO;
 import com.example.domain.entity.CarroModel;
 import com.example.domain.enums.Categoria;
-import com.example.domain.service.CarroService;
 import com.example.domain.service.serviceimpl.CarroServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,9 +52,9 @@ public class CarroController {
         return new ResponseEntity<>(carrosDisponiveis, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluirPorId(@PathVariable Long id) {
-        carroService.excluirPorId(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @DeleteMapping("/deletar")
+    public ResponseEntity<CarroDTO> excluirPorId(@PathVariable CarroDTO carroDTO) {
+        CarroDTO carroDeletado = carroService.deletarPorChassi(carroDTO);
+        return new ResponseEntity<>(carroDeletado , HttpStatus.OK);
     }
 }
