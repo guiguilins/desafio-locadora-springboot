@@ -73,6 +73,7 @@ public class CarroServiceImpl implements CarroService {
     public List<CarroDTO> listarCarros() {
         List<CarroModel> carros = carroRepository.findAll();
         return carros.stream()
+                .filter(CarroModel::getCarroDisponivel)
                 .map(carroMapper::convertToCarroDTO)
                 .collect(Collectors.toList());
     }
