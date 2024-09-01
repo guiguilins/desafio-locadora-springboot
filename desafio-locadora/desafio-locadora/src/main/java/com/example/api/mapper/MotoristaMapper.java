@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class MotoristaMapper {
 
-
     public MotoristaDTO convertToMotoristaDTO(MotoristaModel motoristaModel){
         return new MotoristaDTO(
                 motoristaModel.getNome(),

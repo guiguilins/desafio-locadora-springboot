@@ -2,11 +2,9 @@ package com.example.domain.service.serviceimpl;
 
 import com.example.api.dtos.MotoristaDTO;
 import com.example.api.mapper.MotoristaMapper;
-import com.example.domain.entity.CarroModel;
 import com.example.domain.entity.MotoristaModel;
 import com.example.domain.repository.MotoristaRepository;
 import com.example.domain.service.MotoristaService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -10,10 +10,4 @@ import org.springframework.stereotype.Component;
 @Component
 public class ApoliceSeguroMapper {
 
-    @Autowired
-    private ModelMapper modelMapper;
-
-    public ApoliceSeguroDTO convertToApoliceSeguroDTO(ApoliceSeguroModel apoliceSeguroModel) {
-        return modelMapper.map(apoliceSeguroModel, ApoliceSeguroDTO.class);
-    }
 }

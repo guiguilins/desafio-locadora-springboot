@@ -1,9 +1,6 @@
 package com.example.domain.repository;
 
-import com.example.api.dtos.CarroDTO;
-import com.example.api.dtos.CarroDisponivelDTO;
 import com.example.domain.entity.CarroModel;
-import com.example.domain.entity.MotoristaModel;
 import com.example.domain.enums.Categoria;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,7 +13,7 @@ import java.util.Optional;
 @Repository
 public interface CarroRepository extends JpaRepository<CarroModel, Long> {
 
-    List<CarroModel> findByModeloCategoria(Categoria categoria);
+    List<CarroModel>findByModeloCategoria(Categoria categoria);
 
     Optional<CarroModel> findByChassi(String chassi);
 

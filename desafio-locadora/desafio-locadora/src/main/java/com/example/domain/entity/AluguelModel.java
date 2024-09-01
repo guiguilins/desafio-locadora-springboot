@@ -39,7 +39,6 @@ public class AluguelModel {
 
     @ManyToOne
     @JoinColumn(name = "carro_id", referencedColumnName = "id")
-    @JsonIgnore
     private CarroModel carro;
 
     @OneToOne(cascade = CascadeType.ALL)
