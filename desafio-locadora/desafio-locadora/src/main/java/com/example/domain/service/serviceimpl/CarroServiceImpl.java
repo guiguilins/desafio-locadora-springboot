@@ -37,14 +37,11 @@ public class CarroServiceImpl implements CarroService {
     private FabricanteRepository fabricanteRepository;
 
     @Override
-    public CarroModel salvarCarro(CarroRequestDTO data) {
+    public CarroDTO salvarCarro(CarroRequestDTO data) {
 
-        FabricanteModel fabricante = fabricanteRepository.findById(data.modelo().getFabricante().getId())
-                .orElseGet(() -> {
-                    FabricanteModel novoFabricante = new FabricanteModel();
-                    novoFabricante.setNome(data.modelo().getFabricante().getNome());
-                    return fabricanteRepository.save(novoFabricante);
-                });
+        FabricanteModel fabricante = new FabricanteModel();
+        fabricante.setNome(data.modelo().getFabricante().getNome());
+        fabricante = fabricanteRepository.save(fabricante);
 
         ModeloCarroModel modelo = new ModeloCarroModel();
         modelo.setDescricao(data.modelo().getDescricao());
@@ -56,10 +53,9 @@ public class CarroServiceImpl implements CarroService {
                 .map(acessorioModel -> {
                     AcessorioModel acessorio = new AcessorioModel();
                     acessorio.setAcessorios(acessorioModel.getAcessorios());
-                    return acessorio;
+                    return acessorioRepository.save(acessorio);
                 })
                 .collect(Collectors.toList());
-        acessorioRepository.saveAll(acessorios);
 
         CarroModel carro = new CarroModel();
         carro.setPlaca(data.placa());
@@ -69,7 +65,9 @@ public class CarroServiceImpl implements CarroService {
         carro.setModelo(modelo);
         carro.setAcessorios(acessorios);
 
-        return carroRepository.save(carro);
+        carro = carroRepository.save(carro);
+
+        return carroMapper.convertToCarroDTO(carro);
     }
 
     public List<CarroDTO> listarCarros() {
