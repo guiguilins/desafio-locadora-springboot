@@ -82,8 +82,8 @@ public class CarroServiceImpl implements CarroService {
 
 
     @Override
-    public List<CarroDTO> filtrarCarros(Categoria categoria, List<Long> acessoriosIds) {
-        List<CarroModel> carrosFiltrados;
+    public List<CarroModel> filtrarCarros(Categoria categoria, List<Long> acessoriosIds) {
+        carroMapper.convertToCarroDTO(new CarroModel());
 
         if (categoria != null && acessoriosIds != null && !acessoriosIds.isEmpty()) {
             carrosFiltrados = carroRepository.findByAcessorios(acessoriosIds, acessoriosIds.size());
@@ -131,6 +131,13 @@ public class CarroServiceImpl implements CarroService {
                 .orElseThrow(() -> new RuntimeException("Carro não encontrado com o chassi: " + carroDTO.chassi()));
         carroRepository.delete( carroExistente);
         return carroMapper.convertToCarroDTO(carroExistente);
+
+    public CarroDTO deletarPorChassi(CarroDTO carroDTO) {
+        CarroModel motoristaExistente = carroRepository.findByChassi(carroDTO.chassi())
+                .orElseThrow(() -> new RuntimeException("Motorista não encontrado com o CPF: " + carroDTO.chassi()));
+        carroRepository.delete(motoristaExistente);
+        return carroMapper.convertToCarroDTO(motoristaExistente);
+
     }
 
 
