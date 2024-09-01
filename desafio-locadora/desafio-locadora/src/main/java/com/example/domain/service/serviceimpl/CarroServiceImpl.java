@@ -70,14 +70,13 @@ public class CarroServiceImpl implements CarroService {
         return carroMapper.convertToCarroDTO(carro);
     }
 
+    @Override
     public List<CarroDTO> listarCarros() {
         List<CarroModel> carros = carroRepository.findAll();
         return carros.stream()
                 .map(carroMapper::convertToCarroDTO)
                 .collect(Collectors.toList());
     }
-
-
 
     @Override
     public List<CarroDTO> filtrarCarros(Categoria categoria, List<Long> acessoriosIds) {

@@ -6,11 +6,11 @@ import com.example.domain.entity.MotoristaModel;
 import java.util.List;
 
 public interface MotoristaService {
-    public MotoristaModel createMotorista(MotoristaModel motorista);
+    MotoristaModel createMotorista(MotoristaModel motorista);
 
-    public List<MotoristaDTO> listarMotoristas();
+    List<MotoristaDTO> listarMotoristas();
 
-    public MotoristaDTO updateMotorista(MotoristaDTO motoristaDTO);
+    MotoristaDTO updateMotorista(MotoristaDTO motoristaDTO);
 
-    public MotoristaDTO deleteMotorista(MotoristaDTO motoristaDTO);
+    MotoristaDTO deleteMotorista(MotoristaDTO motoristaDTO);
 }

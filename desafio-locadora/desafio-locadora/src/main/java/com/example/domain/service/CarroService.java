@@ -9,15 +9,15 @@ import com.example.domain.enums.Categoria;
 import java.util.List;
 
 public interface CarroService {
-    public List<CarroDTO> listarCarros();
+    List<CarroDTO> listarCarros();
 
-    public CarroDTO salvarCarro(CarroRequestDTO data);
+    CarroDTO salvarCarro(CarroRequestDTO data);
 
-    public List<CarroDTO> filtrarCarros(Categoria categoria, List<Long> acessoriosIds);
+    List<CarroDTO> filtrarCarros(Categoria categoria, List<Long> acessoriosIds);
 
-    public List<CarroDisponivelDTO> listarCarrosDisponiveisParaAluguel(String fabricante, String modelo, Categoria categoria, List<Long> acessorios);
+    List<CarroDisponivelDTO> listarCarrosDisponiveisParaAluguel(String fabricante, String modelo, Categoria categoria, List<Long> acessorios);
 
-    public CarroDTO atualizarCarro(CarroDTO carroDTO);
+    CarroDTO atualizarCarro(CarroDTO carroDTO);
 
-    public CarroDTO deletarPorChassi(CarroDTO carroDTO);
+    CarroDTO deletarPorChassi(CarroDTO carroDTO);
 }
