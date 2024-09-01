@@ -14,11 +14,11 @@ public interface CarroService {
 
     public CarroModel salvarCarro(CarroRequestDTO data);
 
-    public List<CarroModel> filtrarCarros(Categoria categoria, List<Long> acessoriosIds);
+    public List<CarroDTO> filtrarCarros(Categoria categoria, List<Long> acessoriosIds);
 
     public List<CarroDisponivelDTO> listarCarrosDisponiveisParaAluguel(String fabricante, String modelo, Categoria categoria, List<Long> acessorios);
 
+    public CarroDTO atualizarCarro(CarroDTO carroDTO);
+
     public CarroDTO deletarPorChassi(CarroDTO carroDTO);
-
-
 }

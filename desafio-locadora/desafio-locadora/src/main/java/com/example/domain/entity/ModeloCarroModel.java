@@ -32,6 +32,5 @@ public class ModeloCarroModel {
     @ManyToOne
     @JoinColumn(name = "fabricante_id")
     private FabricanteModel fabricante;
-
 }
 
