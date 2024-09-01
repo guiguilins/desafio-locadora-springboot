@@ -4,7 +4,7 @@ import com.example.api.dtos.CarroDTO;
 import com.example.api.dtos.CarroDisponivelDTO;
 import com.example.api.dtos.CarroRequestDTO;
 import com.example.domain.enums.Categoria;
-import com.example.domain.service.serviceimpl.CarroServiceImpl;
+import com.example.domain.service.CarroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ import java.util.List;
 public class CarroController {
 
     @Autowired
-    private CarroServiceImpl carroService;
+    private CarroService carroService;
 
     @GetMapping("/geral")
     public ResponseEntity<List<CarroDTO>> listarCarros() {
@@ -51,15 +51,15 @@ public class CarroController {
         return new ResponseEntity<>(carrosDisponiveis, HttpStatus.OK);
     }
 
-    @PutMapping("/atualizar")
-    public ResponseEntity<CarroDTO> atualizarCarro(@RequestBody CarroDTO carroDTO) {
-        CarroDTO carroAtualizado = carroService.atualizarCarro(carroDTO);
+    @PutMapping("/atualizar/{id}")
+    public ResponseEntity<CarroDTO> atualizarCarro(@PathVariable Long id, @RequestBody CarroDTO carroDTO) {
+        CarroDTO carroAtualizado = carroService.atualizarCarro(id, carroDTO);
         return new ResponseEntity<>(carroAtualizado, HttpStatus.OK);
     }
 
-    @DeleteMapping("/deletar/{chassi}")
-    public ResponseEntity<CarroDTO> deletarPorChassi(@PathVariable CarroDTO carroDTO) {
-        CarroDTO carroDeletado = carroService.deletarPorChassi(carroDTO);
-        return new ResponseEntity<>(carroDeletado, HttpStatus.OK);
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity<String> deletarPorId(@PathVariable("id") Long id) {
+        carroService.deletarPorId(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Carro deletado com sucesso!");
     }
 }

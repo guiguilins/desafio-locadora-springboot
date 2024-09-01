@@ -17,7 +17,7 @@ public interface CarroService {
 
     List<CarroDisponivelDTO> listarCarrosDisponiveisParaAluguel(String fabricante, String modelo, Categoria categoria, List<Long> acessorios);
 
-    CarroDTO atualizarCarro(CarroDTO carroDTO);
+    CarroDTO atualizarCarro(Long id, CarroDTO carroDTO);
 
-    CarroDTO deletarPorChassi(CarroDTO carroDTO);
+    void deletarPorId(Long id);
 }
