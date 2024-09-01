@@ -72,6 +72,7 @@ public class AluguelServiceImpl implements AluguelService {
         aluguel.setCarro(carro);
         aluguel.setApolice(apolice);
         aluguel.setMotorista(motorista);
+        carro.setCarroDisponivel(false);
 
         return aluguelRepository.save(aluguel);
     }

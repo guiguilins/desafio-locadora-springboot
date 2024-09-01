@@ -52,6 +52,8 @@ public class CarroModel {
     @JsonIgnore
     private List<AluguelModel> alugueis = new ArrayList<>();
 
+    private Boolean carroDisponivel = true;
+
     public CarroModel(CarroRequestDTO data) {
         this.placa = data.placa();
         this.cor = data.cor();
