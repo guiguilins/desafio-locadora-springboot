@@ -1,6 +1,7 @@
 package com.example.domain.entity;
 
 import com.example.api.dtos.CarroRequestDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
@@ -48,6 +49,7 @@ public class CarroModel {
     private ModeloCarroModel modelo;
 
     @OneToMany(mappedBy = "carro")
+    @JsonIgnore
     private List<AluguelModel> alugueis = new ArrayList<>();
 
     public CarroModel(CarroRequestDTO data) {

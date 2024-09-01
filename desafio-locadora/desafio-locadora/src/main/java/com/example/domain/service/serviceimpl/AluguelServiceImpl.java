@@ -3,6 +3,13 @@ package com.example.domain.service.serviceimpl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.example.api.dtos.AluguelRequestDTO;
+import com.example.domain.entity.ApoliceSeguroModel;
+import com.example.domain.entity.CarroModel;
+import com.example.domain.entity.MotoristaModel;
+import com.example.domain.repository.ApoliceSeguroRepository;
+import com.example.domain.repository.CarroRepository;
+import com.example.domain.repository.MotoristaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +28,15 @@ public class AluguelServiceImpl implements AluguelService {
     @Autowired
     private AluguelMapper aluguelMapper;
 
+    @Autowired
+    private CarroRepository carroRepository;
+
+    @Autowired
+    private MotoristaRepository motoristaRepository;
+
+    @Autowired
+    private ApoliceSeguroRepository apoliceRepository;
+
     @Override
     public List<AluguelDTO> listarAlugueis() {
         List<AluguelModel> alugueis = aluguelRepository.findAll();
@@ -36,5 +52,51 @@ public class AluguelServiceImpl implements AluguelService {
         }
 
         aluguelRepository.deleteById(id);
+    }
+
+    public AluguelModel contratoAluguel(AluguelRequestDTO data) {
+        CarroModel carro = carroRepository.findByChassi(data.carro().getChassi())
+                .orElseThrow(() -> new RuntimeException("Carro não encontrado"));
+
+        MotoristaModel motorista = motoristaRepository.findByCpf(data.motorista().getCpf())
+                .orElseThrow(() -> new RuntimeException("Motorista não encontrado"));
+
+//        ApoliceSeguroModel apolice = apoliceRepository.findById(data.apolice().getId())
+//                .orElseThrow(() -> new RuntimeException("Apólice não encontrada"));
+
+        AluguelModel aluguel = new AluguelModel();
+        aluguel.setDataPedido(data.dataPedido());
+        aluguel.setDataEntrega(data.dataEntrega());
+        aluguel.setDataDevolucao(data.dataDevolucao());
+        aluguel.setValorTotal(data.valorTotal());
+        aluguel.setCarro(carro);
+        aluguel.setApolice(null);
+        aluguel.setMotorista(motorista);
+
+        return aluguelRepository.save(aluguel);
+    }
+
+    public AluguelModel updateAluguel(Long id, AluguelRequestDTO data) {
+        AluguelModel aluguel = aluguelRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Aluguel não encontrado"));
+
+        CarroModel carro = carroRepository.findByChassi(data.carro().getChassi())
+                .orElseThrow(() -> new RuntimeException("Carro não encontrado"));
+
+        MotoristaModel motorista = motoristaRepository.findByCpf(data.motorista().getCpf())
+                .orElseThrow(() -> new RuntimeException("Motorista não encontrado"));
+
+//        ApoliceSeguroModel apolice = apoliceRepository.findById(data.apolice().getId())
+//              .orElseThrow(() -> new RuntimeException("Apólice não encontrada"));
+
+        aluguel.setDataPedido(data.dataPedido());
+        aluguel.setDataEntrega(data.dataEntrega());
+        aluguel.setDataDevolucao(data.dataDevolucao());
+        aluguel.setValorTotal(data.valorTotal());
+        aluguel.setCarro(carro);
+        aluguel.setApolice(null);
+        aluguel.setMotorista(motorista);
+
+        return aluguelRepository.save(aluguel);
     }
 }

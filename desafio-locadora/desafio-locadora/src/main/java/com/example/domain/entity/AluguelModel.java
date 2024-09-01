@@ -6,7 +6,6 @@ import java.util.Date;
 
 import com.example.api.dtos.AluguelRequestDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -39,7 +38,6 @@ public class AluguelModel {
 
     @ManyToOne
     @JoinColumn(name = "carro_id", referencedColumnName = "id")
-    @JsonIgnore
     private CarroModel carro;
 
     @OneToOne(cascade = CascadeType.ALL)
