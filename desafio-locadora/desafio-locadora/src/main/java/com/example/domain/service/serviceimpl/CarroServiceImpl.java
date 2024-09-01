@@ -106,8 +106,8 @@ public class CarroServiceImpl implements CarroService {
         }
 
     @Override
-    public CarroDTO atualizarCarro(CarroDTO carroDTO) {
-        CarroModel carroExistente = carroRepository.findByChassi(carroDTO.chassi())
+    public CarroDTO atualizarCarro(Long id, CarroDTO carroDTO) {
+        CarroModel carroExistente = carroRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Carro não encontrado com o chassi: " + carroDTO.chassi()));
 
         if(carroDTO.placa() != null) {
@@ -124,11 +124,13 @@ public class CarroServiceImpl implements CarroService {
     }
 
     @Override
-    public CarroDTO deletarPorChassi(CarroDTO carroDTO) {
-        CarroModel carroExistente = carroRepository.findByChassi(carroDTO.chassi())
-                .orElseThrow(() -> new RuntimeException("Carro não encontrado com o chassi: " + carroDTO.chassi()));
-        carroRepository.delete(carroExistente);
-        return carroMapper.convertToCarroDTO(carroExistente);
+    public void deletarPorId(Long id) {
+        if (carroRepository.findById(id).isEmpty()) {
+            throw new RuntimeException();
+        }
+
+        carroRepository.deleteById(id);
+
     }
 }
 
