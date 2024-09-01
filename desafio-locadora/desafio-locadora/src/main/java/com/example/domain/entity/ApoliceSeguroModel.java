@@ -3,6 +3,7 @@ package com.example.domain.entity;
 import java.math.BigDecimal;
 
 import com.example.api.dtos.ApoliceSeguroRequestDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,6 +23,7 @@ public class ApoliceSeguroModel {
     private boolean protecaoRoubo;
 
     @OneToOne(mappedBy = "apolice")
+    @JsonIgnore
     private AluguelModel aluguel;
 
     public ApoliceSeguroModel(ApoliceSeguroRequestDTO data) {
