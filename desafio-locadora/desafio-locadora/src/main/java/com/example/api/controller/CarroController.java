@@ -20,16 +20,16 @@ public class CarroController {
     @Autowired
     private CarroServiceImpl carroService;
 
-    @GetMapping("/disponiveis")
+    @GetMapping("/geral")
     public ResponseEntity<List<CarroDTO>> listarCarros() {
         List<CarroDTO> carrosDisponiveis = carroService.listarCarros();
         return new ResponseEntity<>(carrosDisponiveis, HttpStatus.OK);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<CarroModel> criarCarro(@RequestBody CarroRequestDTO carroRequestDTO) {
-        CarroModel carro = carroService.salvarCarro(carroRequestDTO);
-        return new ResponseEntity<CarroModel>(carro, HttpStatus.CREATED);
+    public ResponseEntity<CarroDTO> criarCarro(@RequestBody CarroRequestDTO carroRequestDTO) {
+        CarroDTO carro = carroService.salvarCarro(carroRequestDTO);
+        return new ResponseEntity<CarroDTO>(carro, HttpStatus.CREATED);
     }
 
     @GetMapping("/filtros")
@@ -41,7 +41,7 @@ public class CarroController {
         return new ResponseEntity<>(carrosFiltrados, HttpStatus.OK);
     }
 
-    @GetMapping("/filtros/disponiveis")
+    @GetMapping("/aluguel/disponiveis")
     public ResponseEntity<List<CarroDisponivelDTO>> listarCarrosDisponiveisParaAluguel(
             @RequestParam(required = false) String fabricante,
             @RequestParam(required = false) String modelo,
@@ -61,6 +61,6 @@ public class CarroController {
     @DeleteMapping("/deletar")
     public ResponseEntity<CarroDTO> excluirPorId(@PathVariable CarroDTO carroDTO) {
         CarroDTO carroDeletado = carroService.deletarPorChassi(carroDTO);
-        return new ResponseEntity<>(carroDeletado , HttpStatus.OK);
+        return new ResponseEntity<>(carroDeletado, HttpStatus.OK);
     }
 }

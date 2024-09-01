@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import com.example.api.dtos.AluguelDTO;
 import com.example.domain.service.AluguelService;
 
-
 @RestController
 @RequestMapping("/aluguel")
 public class AluguelController {
