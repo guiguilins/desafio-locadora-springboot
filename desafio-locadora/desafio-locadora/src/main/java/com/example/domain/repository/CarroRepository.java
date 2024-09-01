@@ -15,11 +15,7 @@ import java.util.Optional;
 public interface CarroRepository extends JpaRepository<CarroModel, Long> {
 
     List<CarroModel>findByModeloCategoria(Categoria categoria);
-
-    Optional<CarroModel> findByChassi(String chassi);
-
-    Optional<CarroModel> findByChassi(String chassi);
-
+    
     Optional<CarroModel> findByChassi(String chassi);
 
     @Query("SELECT c FROM CarroModel c JOIN c.acessorios a WHERE a.id IN :acessoriosIds GROUP BY c HAVING COUNT(DISTINCT a.id) = :acessoriosCount")
