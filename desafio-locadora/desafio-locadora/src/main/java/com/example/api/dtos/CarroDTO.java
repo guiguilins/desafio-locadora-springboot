@@ -1,6 +1,5 @@
 package com.example.api.dtos;
 
-import com.example.domain.entity.AcessorioModel;
 import com.example.domain.entity.AluguelModel;
 import com.example.domain.entity.CarroModel;
 import com.example.domain.entity.ModeloCarroModel;

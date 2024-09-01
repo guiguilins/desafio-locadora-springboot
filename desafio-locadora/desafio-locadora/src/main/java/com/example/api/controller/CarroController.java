@@ -57,8 +57,8 @@ public class CarroController {
         return new ResponseEntity<>(carroAtualizado, HttpStatus.OK);
     }
 
-    @DeleteMapping("/deletar")
-    public ResponseEntity<CarroDTO> excluirPorId(@PathVariable CarroDTO carroDTO) {
+    @DeleteMapping("/deletar/{chassi}")
+    public ResponseEntity<CarroDTO> deletarPorChassi(@PathVariable CarroDTO carroDTO) {
         CarroDTO carroDeletado = carroService.deletarPorChassi(carroDTO);
         return new ResponseEntity<>(carroDeletado, HttpStatus.OK);
     }

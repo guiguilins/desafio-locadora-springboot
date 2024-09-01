@@ -1,8 +1,6 @@
 package com.example.api.controller;
 
 import com.example.domain.entity.AcessorioModel;
-import com.example.domain.entity.MotoristaModel;
-import com.example.domain.service.AcessorioService;
 import com.example.domain.service.serviceimpl.AcessorioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
