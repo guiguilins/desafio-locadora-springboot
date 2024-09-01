@@ -1,7 +1,6 @@
 package com.example.domain.service.serviceimpl;
 
 import com.example.api.dtos.ApoliceSeguroDTO;
-import com.example.api.dtos.ApoliceSeguroRequestDTO;
 import com.example.api.mapper.ApoliceSeguroMapper;
 import com.example.domain.entity.ApoliceSeguroModel;
 import com.example.domain.repository.ApoliceSeguroRepository;
@@ -25,7 +24,6 @@ public class ApoliceSeguroServiceImpl implements ApoliceSeguroService {
     public ApoliceSeguroModel createApoliceSeguro(ApoliceSeguroModel apoliceSeguro) {
         return this.apoliceSeguroRepository.save(apoliceSeguro);
     }
-
 
     @Override
     public List<ApoliceSeguroDTO> listarApoliceSeguro() {
