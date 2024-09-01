@@ -33,11 +33,11 @@ public class CarroController {
     }
 
     @GetMapping("/filtros")
-    public ResponseEntity<List<CarroModel>> filtrarCarros(
+    public ResponseEntity<List<CarroDTO>> filtrarCarros(
             @RequestParam(required = false) Categoria categoria,
             @RequestParam(required = false) List<Long> acessoriosIds) {
 
-        List<CarroModel> carrosFiltrados = carroService.filtrarCarros(categoria, acessoriosIds);
+        List<CarroDTO> carrosFiltrados = carroService.filtrarCarros(categoria, acessoriosIds);
         return new ResponseEntity<>(carrosFiltrados, HttpStatus.OK);
     }
 
@@ -50,6 +50,12 @@ public class CarroController {
 
         List<CarroDisponivelDTO> carrosDisponiveis = carroService.listarCarrosDisponiveisParaAluguel(fabricante, modelo, categoria, acessorios);
         return new ResponseEntity<>(carrosDisponiveis, HttpStatus.OK);
+    }
+
+    @PutMapping("/atualizar")
+    public ResponseEntity<CarroDTO> atualizarCarro(@RequestBody CarroDTO carroDTO) {
+        CarroDTO carroAtualizado = carroService.atualizarCarro(carroDTO);
+        return new ResponseEntity<>(carroAtualizado, HttpStatus.OK);
     }
 
     @DeleteMapping("/deletar")

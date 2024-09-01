@@ -1,7 +1,5 @@
 package com.example.domain.service.serviceimpl;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -81,18 +79,24 @@ public class CarroServiceImpl implements CarroService {
                 .collect(Collectors.toList());
     }
 
+
+
     @Override
     public List<CarroModel> filtrarCarros(Categoria categoria, List<Long> acessoriosIds) {
         carroMapper.convertToCarroDTO(new CarroModel());
+
         if (categoria != null && acessoriosIds != null && !acessoriosIds.isEmpty()) {
-            return carroRepository.findByAcessorios(acessoriosIds, acessoriosIds.size());
+            carrosFiltrados = carroRepository.findByAcessorios(acessoriosIds, acessoriosIds.size());
         } else if (categoria != null) {
-            return carroRepository.findByModeloCategoria(categoria);
+            carrosFiltrados = carroRepository.findByModeloCategoria(categoria);
         } else if (acessoriosIds != null && !acessoriosIds.isEmpty()) {
-            return carroRepository.findByAcessorios(acessoriosIds, acessoriosIds.size());
+            carrosFiltrados = carroRepository.findByAcessorios(acessoriosIds, acessoriosIds.size());
         } else {
-            return carroRepository.findAll();
+            carrosFiltrados = carroRepository.findAll();
         }
+        return carrosFiltrados.stream()
+                .map(carroMapper::convertToCarroDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -104,11 +108,36 @@ public class CarroServiceImpl implements CarroService {
         }
 
     @Override
+    public CarroDTO atualizarCarro(CarroDTO carroDTO) {
+        CarroModel carroExistente = carroRepository.findByChassi(carroDTO.chassi())
+                .orElseThrow(() -> new RuntimeException("Carro não encontrado com o chassi: " + carroDTO.chassi()));
+
+        if(carroDTO.placa() != null) {
+            carroExistente.setPlaca(carroDTO.placa());
+        }
+        if (carroDTO.cor() != null) {
+            carroExistente.setCor(carroDTO.cor());
+        }
+        if (carroDTO.valorDiaria()!= null) {
+            carroExistente.setValorDiaria(carroDTO.valorDiaria());
+        }
+        CarroModel carroAtualizado = carroRepository.save(carroExistente);
+        return carroMapper.convertToCarroDTO(carroAtualizado);
+    }
+
+    @Override
+    public CarroDTO deletarPorChassi(CarroDTO carroDTO) {
+        CarroModel carroExistente = carroRepository.findByChassi(carroDTO.chassi())
+                .orElseThrow(() -> new RuntimeException("Carro não encontrado com o chassi: " + carroDTO.chassi()));
+        carroRepository.delete( carroExistente);
+        return carroMapper.convertToCarroDTO(carroExistente);
+
     public CarroDTO deletarPorChassi(CarroDTO carroDTO) {
         CarroModel motoristaExistente = carroRepository.findByChassi(carroDTO.chassi())
                 .orElseThrow(() -> new RuntimeException("Motorista não encontrado com o CPF: " + carroDTO.chassi()));
         carroRepository.delete(motoristaExistente);
         return carroMapper.convertToCarroDTO(motoristaExistente);
+
     }
 
 

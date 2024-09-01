@@ -10,9 +10,6 @@ import com.example.domain.entity.AluguelModel;
 @Component
 public class AluguelMapper {
 
-	@Autowired
-	private ModelMapper modelMapper;
-
 	public AluguelDTO convertToAluguelDTO(AluguelModel aluguelModel) {
 		return new AluguelDTO(aluguelModel.getDataPedido(), aluguelModel.getDataEntrega(),
 				aluguelModel.getDataDevolucao(), aluguelModel.getValorTotal(), aluguelModel.getCarro(),

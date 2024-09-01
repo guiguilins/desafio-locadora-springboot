@@ -1,6 +1,7 @@
 package com.example.domain.entity;
 
 import com.example.api.dtos.CarroRequestDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
