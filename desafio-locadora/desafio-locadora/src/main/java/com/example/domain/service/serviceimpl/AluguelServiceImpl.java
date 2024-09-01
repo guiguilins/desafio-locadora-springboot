@@ -46,6 +46,7 @@ public class AluguelServiceImpl implements AluguelService {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public void deletarAluguel(Long id) {
         if (aluguelRepository.findById(id).isEmpty()) {
             throw new RuntimeException();
@@ -54,6 +55,7 @@ public class AluguelServiceImpl implements AluguelService {
         aluguelRepository.deleteById(id);
     }
 
+    @Override
     public AluguelModel contratoAluguel(AluguelRequestDTO data) {
         CarroModel carro = carroRepository.findByChassi(data.carro().getChassi())
                 .orElseThrow(() -> new RuntimeException("Carro não encontrado"));
@@ -77,6 +79,7 @@ public class AluguelServiceImpl implements AluguelService {
         return aluguelRepository.save(aluguel);
     }
 
+    @Override
     public AluguelModel updateAluguel(Long id, AluguelRequestDTO data) {
         AluguelModel aluguel = aluguelRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Aluguel não encontrado"));
