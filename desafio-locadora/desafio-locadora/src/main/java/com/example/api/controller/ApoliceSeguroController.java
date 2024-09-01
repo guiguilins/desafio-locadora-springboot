@@ -1,7 +1,6 @@
 package com.example.api.controller;
 
 import com.example.api.dtos.ApoliceSeguroDTO;
-import com.example.api.dtos.ApoliceSeguroRequestDTO;
 import com.example.domain.entity.ApoliceSeguroModel;
 import com.example.domain.service.ApoliceSeguroService;
 import org.springframework.beans.factory.annotation.Autowired;
