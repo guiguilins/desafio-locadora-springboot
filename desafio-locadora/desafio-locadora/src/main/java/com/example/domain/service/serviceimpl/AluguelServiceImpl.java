@@ -61,8 +61,8 @@ public class AluguelServiceImpl implements AluguelService {
         MotoristaModel motorista = motoristaRepository.findByCpf(data.motorista().getCpf())
                 .orElseThrow(() -> new RuntimeException("Motorista não encontrado"));
 
-//        ApoliceSeguroModel apolice = apoliceRepository.findById(data.apolice().getId())
-//                .orElseThrow(() -> new RuntimeException("Apólice não encontrada"));
+        ApoliceSeguroModel apolice = apoliceRepository.findById(data.apolice().getId())
+                .orElseThrow(() -> new RuntimeException("Apólice não encontrada"));
 
         AluguelModel aluguel = new AluguelModel();
         aluguel.setDataPedido(data.dataPedido());
@@ -70,7 +70,7 @@ public class AluguelServiceImpl implements AluguelService {
         aluguel.setDataDevolucao(data.dataDevolucao());
         aluguel.setValorTotal(data.valorTotal());
         aluguel.setCarro(carro);
-        aluguel.setApolice(null);
+        aluguel.setApolice(apolice);
         aluguel.setMotorista(motorista);
 
         return aluguelRepository.save(aluguel);
@@ -86,15 +86,15 @@ public class AluguelServiceImpl implements AluguelService {
         MotoristaModel motorista = motoristaRepository.findByCpf(data.motorista().getCpf())
                 .orElseThrow(() -> new RuntimeException("Motorista não encontrado"));
 
-//        ApoliceSeguroModel apolice = apoliceRepository.findById(data.apolice().getId())
-//              .orElseThrow(() -> new RuntimeException("Apólice não encontrada"));
+        ApoliceSeguroModel apolice = apoliceRepository.findById(data.apolice().getId())
+              .orElseThrow(() -> new RuntimeException("Apólice não encontrada"));
 
         aluguel.setDataPedido(data.dataPedido());
         aluguel.setDataEntrega(data.dataEntrega());
         aluguel.setDataDevolucao(data.dataDevolucao());
         aluguel.setValorTotal(data.valorTotal());
         aluguel.setCarro(carro);
-        aluguel.setApolice(null);
+        aluguel.setApolice(apolice);
         aluguel.setMotorista(motorista);
 
         return aluguelRepository.save(aluguel);
