@@ -49,6 +49,7 @@ public class CarroModel {
     private ModeloCarroModel modelo;
 
     @OneToMany(mappedBy = "carro")
+    @JsonIgnore
     private List<AluguelModel> alugueis = new ArrayList<>();
 
     public CarroModel(CarroRequestDTO data) {

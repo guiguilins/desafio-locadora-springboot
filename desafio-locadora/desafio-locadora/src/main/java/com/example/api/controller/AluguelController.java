@@ -2,24 +2,21 @@ package com.example.api.controller;
 
 import java.util.List;
 
+import com.example.api.dtos.AluguelRequestDTO;
+import com.example.domain.entity.AluguelModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.api.dtos.AluguelDTO;
 import com.example.domain.service.AluguelService;
-
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
 @RequestMapping("/aluguel")
 public class AluguelController {
-    
+
     @Autowired
     private AluguelService aluguelService;
 
@@ -37,5 +34,17 @@ public class AluguelController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Aluguel não encontrado.");
         }
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<AluguelModel> contratoAluguel(@RequestBody AluguelRequestDTO aluguelRequestDTO) {
+        AluguelModel aluguel = aluguelService.contratoAluguel(aluguelRequestDTO);
+        return new ResponseEntity<>(aluguel, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<AluguelModel> atualizarAluguel(@PathVariable Long id, @RequestBody AluguelRequestDTO aluguelRequestDTO) {
+        AluguelModel aluguelAtualizado = aluguelService.updateAluguel(id, aluguelRequestDTO);
+        return new ResponseEntity<>(aluguelAtualizado, HttpStatus.OK);
     }
 }
