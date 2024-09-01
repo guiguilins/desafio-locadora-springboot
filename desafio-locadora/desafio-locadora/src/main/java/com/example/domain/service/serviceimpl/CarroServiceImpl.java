@@ -73,7 +73,6 @@ public class CarroServiceImpl implements CarroService {
     public List<CarroDTO> listarCarros() {
         List<CarroModel> carros = carroRepository.findAll();
         return carros.stream()
-                .filter(CarroModel::getCarroDisponivel)
                 .map(carroMapper::convertToCarroDTO)
                 .collect(Collectors.toList());
     }
@@ -102,6 +101,7 @@ public class CarroServiceImpl implements CarroService {
     public List<CarroDisponivelDTO> listarCarrosDisponiveisParaAluguel(String fabricante, String modelo, Categoria categoria, List<Long> acessorios) {
         List<CarroModel> carrosDisponiveis = carroRepository.findCarrosDisponiveis(fabricante, modelo, categoria, acessorios);
         return carrosDisponiveis.stream()
+                .filter(CarroModel::getCarroDisponivel)
                 .map(CarroDisponivelDTO::new)
                 .collect(Collectors.toList());
         }

@@ -3,7 +3,6 @@ package com.example.api.controller;
 import com.example.api.dtos.CarroDTO;
 import com.example.api.dtos.CarroDisponivelDTO;
 import com.example.api.dtos.CarroRequestDTO;
-import com.example.domain.entity.CarroModel;
 import com.example.domain.enums.Categoria;
 import com.example.domain.service.serviceimpl.CarroServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
