@@ -1,6 +1,8 @@
-# Desafio Locadora de Veículos - Spring Boot - Squad 10
+## Desafio Locadora de Veículos - Spring Boot - Squad 10
 
-### Participantes
+**Desafio Locadora de Veículos**, desenvolvido pela **Squad 10** com o objetivo de criar uma aplicação completa de gerenciamento de locadora de veículos utilizando **Spring Boot**.
+
+## Participantes
 
 - Gerson Fragoso
 - Guilherme
@@ -8,15 +10,26 @@
 - Daniel
 - Samuel
 
+
+## Estrutura do Projeto
+
+O sistema é dividido em módulos que representam as principais entidades da aplicação: **Motorista**, **Carro**, **Aluguel** e **Apólice de Seguro**. Cada módulo é composto por um modelo de dados, serviços para manipulação desses dados, repositórios para acesso ao banco de dados, DTOs para transferência de dados entre as camadas, e controladores REST que expõem APIs para operações CRUD.
+
+## Tecnologias Utilizadas
+
+- **Spring Boot**: Framework principal para o desenvolvimento da aplicação.
+- **MySQL**: Banco de dados utilizado para persistência das informações.
+- **Swagger**: Documentação automática da API REST.
+
 ## Estrutura do Motorista
 
-### 1. **Modelo (`MotoristaModel`)**
+### **Modelo (`MotoristaModel`)**
 
 A classe `MotoristaModel` estende a `PessoaModel` e representa as informações de um motorista no sistema. Atributos principais incluem:
 
 - **`numeroCNH`**: Número da CNH.
 
-### 2. **Serviço (`MotoristaServiceImpl`)**
+### **Serviço (`MotoristaServiceImpl`)**
 
 A classe `MotoristaServiceImpl` implementa a interface `MotoristaService` e contém a lógica de negócio para as operações com motoristas, como:
 
@@ -25,20 +38,20 @@ A classe `MotoristaServiceImpl` implementa a interface `MotoristaService` e cont
 - **Atualizar motorista**: Modifica as informações de um motorista existente.
 - **Deletar motorista**: Remove um motorista do banco de dados.
 
-### 3. **Repositório (`MotoristaRepository`)**
+### **Repositório (`MotoristaRepository`)**
 
 O `MotoristaRepository` é uma interface que estende `JpaRepository` e permite a manipulação dos dados dos motoristas, como buscas e persistências. Um método útil incluído:
 
 - **`findByCpf`**: Busca um motorista pelo CPF.
 
-### 4. **DTOs**
+###  **DTOs**
 
 Utilizamos DTOs para transferir dados entre as camadas da aplicação:
 
 - **`MotoristaRequestDTO`**: Utilizado para capturar os dados necessários ao criar ou atualizar um motorista.
 - **`MotoristaDTO`**: Usado para expor os dados dos motoristas ao cliente, como nome, CPF, data de nascimento, sexo e CNH.
 
-### 5. **Controlador REST (`MotoristaController`)**
+### **Controlador REST (`MotoristaController`)**
 
 O `MotoristaController` expõe uma API REST que permite operações CRUD (Create, Read, Update, Delete) sobre os motoristas. Os principais endpoints são:
 
@@ -146,7 +159,7 @@ O `AluguelController` expõe uma API REST que permite operações CRUD (Create, 
 
 ## Estrutura da Apólice de Seguro
 
-### 1. **Modelo (`ApoliceSeguroModel`)**
+### **Modelo (`ApoliceSeguroModel`)**
 
 A classe `ApoliceSeguroModel` possui uma relação `OneToOne` com a entidade `AluguelModel` e representa as informações de seguro de um veículo no sistema. Atributos principais incluem:
 
@@ -155,7 +168,7 @@ A classe `ApoliceSeguroModel` possui uma relação `OneToOne` com a entidade `Al
 - **`protecaoCausasNaturais`**: Indica se há proteção contra causas naturais.
 - **`protecaoRoubo`**: Indica se há proteção contra roubo.
 
-### 2. **Serviço (`ApoliceSeguroServiceImpl`)**
+### **Serviço (`ApoliceSeguroServiceImpl`)**
 
 A classe `ApoliceSeguroServiceImpl` implementa a interface `ApoliceSeguroService` e contém a lógica de negócio para as operações relacionadas às apólices de seguro, como:
 
@@ -164,18 +177,18 @@ A classe `ApoliceSeguroServiceImpl` implementa a interface `ApoliceSeguroService
 - **`updateApoliceSeguro`**: Atualiza uma apólice de seguro existente com base em seu ID.
 - **`deleteApoliceSeguro`**: Deleta uma apólice de seguro com base em seu ID.
 
-### 3. **Repositório (`ApoliceSeguroRepository`)**
+### **Repositório (`ApoliceSeguroRepository`)**
 
 O `ApoliceSeguroRepository` é uma interface que estende `JpaRepository` e permite a manipulação dos dados das apólices de seguro, como buscas e persistências.
 
-### 4. **DTOs**
+### **DTOs**
 
 Utilizamos DTOs para transferir dados entre as camadas da aplicação:
 
 - **`ApoliceSeguroRequestDTO`**: Utilizado para capturar os dados necessários ao criar ou atualizar uma apólice de seguro.
 - **`ApoliceSeguroDTO`**: Usado para expor os dados das apólices de seguro ao cliente, como `valorFranquia`, `protecaoTerceiro`, `protecaoCausasNaturais`, e `protecaoRoubo`.
 
-### 5. **Controlador REST (`ApoliceSeguroController`)**
+### **Controlador REST (`ApoliceSeguroController`)**
 
 O `ApoliceSeguroController` expõe uma API REST que permite operações CRUD (Create, Read, Update, Delete) sobre as apólices de seguro. Os principais endpoints são:
 
