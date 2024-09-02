@@ -28,7 +28,7 @@ public class CarroController {
     @PostMapping("/create")
     public ResponseEntity<CarroDTO> criarCarro(@RequestBody CarroRequestDTO carroRequestDTO) {
         CarroDTO carro = carroService.salvarCarro(carroRequestDTO);
-        return new ResponseEntity<CarroDTO>(carro, HttpStatus.CREATED);
+        return new ResponseEntity<>(carro, HttpStatus.CREATED);
     }
 
     @GetMapping("/filtros")
