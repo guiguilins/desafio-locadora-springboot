@@ -5,10 +5,8 @@
 - Gerson Fragoso
 - Guilherme
 - João Victor
-- Karen
 - Daniel
 - Samuel
-
 
 ## Estrutura do Motorista
 
@@ -48,45 +46,6 @@ O `MotoristaController` expõe uma API REST que permite operações CRUD (Create
 - **`POST /create`**: Cria um novo motorista.
 - **`PUT /update`**: Atualiza um motorista existente.
 - **`DELETE /deletar`**: Deleta um motorista do sistema.
-
-# Exemplos de Uso
-
-
-```sh
-Criar um motorista:
-POST /locadora/motorista/create
-{
-  "nome": "João da Silva",
-  "cpf": "12345678900",
-  "dataNascimento": "1990-01-01",
-  "sexo": "MASCULINO",
-  "numeroCNH": "123456789"
-}
-
-
-Listar motorista:
-GET /locadora/motorista/listar
- {
-    "nome": "string",
-    "cpf": "string",
-    "dataNascimento": "2024-09-02",
-    "sexo": "MASCULINO",
-    "cnh": "string"
-  }
-
-Deletar motorista:
-DELETE /locadora/motorista/deletar
-{
-  "cpf": "12345678900"
-}
-
-Atualizar motorista:
-PUT /locadora/motorista/update
-{
-      "cpf": "12345678900"
-      //E os campos que deseja atualizar
-}
-```
 
 ## Estrutura do Carro
 
@@ -142,96 +101,45 @@ PUT /locadora/motorista/update
     - `atualizarCarro`: Atualiza um carro existente.
     - `deletarPorId`: Deleta um carro por ID.
 
-# Exemplos de Uso
+## Estrutura do Aluguel
 
-```sh
-Criar um carro:
-POST /carro/create
+### **Modelo (`AluguelModel`)**
 
-{
-    "placa": "XAOC-5422",
-    "chassi": "XYZ987654321",
-    "cor": "Amarelo",
-    "valorDiaria": 250.00,
-    "acessorios": [
-        {
-            "acessorio": "Ar-condicionado"
-        },
-        {
-            "acessorio": "Direção hidráulica"
-        }
-    ],
-    "modelo": {
-        "descricao": "Uno",
-        "categoria": "HATCH_MEDIO",
-        "fabricante": {
-            "nome": "Fiat"
-        }
-    }
-   
-}
+A classe `AluguelModel` representa as informações de um aluguel no sistema. Ela encapsula dados como:
 
-Listar carros com todas as descrições:
-GET /carro/geral
- {
-      {
-        "placa": "ABC1234",
-        "chassi": "534764",
-        "cor": "Azul",
-        "valorDiaria": 123.00,
-        "acessorios": [
-            {
-                "acessorio": "Ar-condicionado"
-            },
-            {
-                "acessorio": "Direção hidráulica"
-            }
-        ],
-        "modelo": {
-            "descricao": "Picape",
-            "categoria": "ESPORTIVO",
-            "fabricante": {
-                "nome": "Volkswagen"
-            }
-          }
-      }
-  }
+- `dataPedido`: Data em que o pedido de aluguel foi feito.
+- `dataEntrega`: Data prevista para a entrega do carro.
+- `dataDevolucao`: Data em que o carro foi devolvido.
+- `valorTotal`: Valor total do aluguel.
+- `CarroModel`: Carro alugado.
+- `ApoliceModel`: Apólice de seguro associada ao aluguel.
+- `MotoristaModel`: Motorista que realizou o aluguel.
 
-Listar carros disponíveis para aluguel
+### **Serviço (`AluguelServiceImpl`)**
 
-GET /carro/aluguel/disponiveis
+A classe `AluguelServiceImpl` implementa a interface `AluguelService` e contém a lógica de negócio para as operações com aluguéis, incluindo:
 
-{
-        "fabricante": "Volkswagen",
-        "modelo": "Picape",
-        "categoria": "ESPORTIVO",
-        "acessorios": [
-            "Ar-condicionado",
-            "Direção hidráulica"
-        ]
-    }
+- **Criar aluguel**: Salva um novo aluguel no banco de dados.
+- **Listar aluguéis**: Retorna todos os aluguéis registrados.
+- **Atualizar aluguel**: Modifica as informações de um aluguel existente.
+- **Deletar aluguel**: Remove um aluguel do banco de dados.
 
-Filtrar carros de acordo com seus acessoriosId ou sua categoria
+### **Repositório (`AluguelRepository`)**
 
-GET /carros/filtros
+O `AluguelRepository` é uma interface que estende `JpaRepository` e permite a manipulação dos dados de aluguéis, como buscas e persistências. Um método útil incluído:
 
-Categoria: /carros/filtros?categoria=ESPORTIVO
+### **DTOs**
 
-acessoriosId: /carros/filtros?acessoriosId=1,2
+Utilizamos DTOs para transferir dados entre as camadas da aplicação:
 
+- **`AluguelRequestDTO`**: Utilizado para capturar os dados necessários ao criar ou atualizar um aluguel.
+- **`AluguelDTO`**: Usado para expor os dados dos aluguéis ao cliente, como datas, valor total, carro, apólice e motorista.
 
-Deletar carro:
-DELETE /carro/deletar/{id}
-{
-  Carro deletado com sucesso!
-}
+### **Controlador REST (`AluguelController`)**
 
-Atualizar carro:
-PUT /carro/atualizar/{id}
-{
-        "placa": "XAOC-5422",
-        "cor": "Amarelo",
-        "valorDiaria": 250.00
-      //E os campos que deseja atualizar
-}
-```
+O `AluguelController` expõe uma API REST que permite operações CRUD (Create, Read, Update, Delete) sobre os aluguéis. Os principais endpoints são:
+
+- **`GET /listar`**: Retorna uma lista de todos os aluguéis.
+- **`POST /create`**: Cria um novo aluguel.
+- **`PUT /update`**: Atualiza um aluguel existente.
+- **`DELETE /deletar`**: Deleta um aluguel do sistema.
