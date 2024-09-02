@@ -143,3 +143,43 @@ O `AluguelController` expõe uma API REST que permite operações CRUD (Create, 
 - **`POST /create`**: Cria um novo aluguel.
 - **`PUT /update`**: Atualiza um aluguel existente.
 - **`DELETE /deletar`**: Deleta um aluguel do sistema.
+
+## Estrutura da Apólice de Seguro
+
+### 1. **Modelo (`ApoliceSeguroModel`)**
+
+A classe `ApoliceSeguroModel` possui uma relação `OneToOne` com a entidade `AluguelModel` e representa as informações de seguro de um veículo no sistema. Atributos principais incluem:
+
+- **`valorFranquia`**: Representa o valor da franquia do seguro.
+- **`protecaoTerceiro`**: Indica se há proteção para terceiros.
+- **`protecaoCausasNaturais`**: Indica se há proteção contra causas naturais.
+- **`protecaoRoubo`**: Indica se há proteção contra roubo.
+
+### 2. **Serviço (`ApoliceSeguroServiceImpl`)**
+
+A classe `ApoliceSeguroServiceImpl` implementa a interface `ApoliceSeguroService` e contém a lógica de negócio para as operações relacionadas às apólices de seguro, como:
+
+- **`createApoliceSeguro`**: Cria uma nova apólice de seguro no banco de dados.
+- **`listarApoliceSeguro`**: Retorna uma lista com todas as apólices de seguro registradas.
+- **`updateApoliceSeguro`**: Atualiza uma apólice de seguro existente com base em seu ID.
+- **`deleteApoliceSeguro`**: Deleta uma apólice de seguro com base em seu ID.
+
+### 3. **Repositório (`ApoliceSeguroRepository`)**
+
+O `ApoliceSeguroRepository` é uma interface que estende `JpaRepository` e permite a manipulação dos dados das apólices de seguro, como buscas e persistências.
+
+### 4. **DTOs**
+
+Utilizamos DTOs para transferir dados entre as camadas da aplicação:
+
+- **`ApoliceSeguroRequestDTO`**: Utilizado para capturar os dados necessários ao criar ou atualizar uma apólice de seguro.
+- **`ApoliceSeguroDTO`**: Usado para expor os dados das apólices de seguro ao cliente, como `valorFranquia`, `protecaoTerceiro`, `protecaoCausasNaturais`, e `protecaoRoubo`.
+
+### 5. **Controlador REST (`ApoliceSeguroController`)**
+
+O `ApoliceSeguroController` expõe uma API REST que permite operações CRUD (Create, Read, Update, Delete) sobre as apólices de seguro. Os principais endpoints são:
+
+- **`GET /listar`**: Retorna uma lista com todas as apólices de seguro.
+- **`POST /create`**: Cria uma nova apólice de seguro.
+- **`PUT /update`**: Atualiza uma apólice de seguro existente.
+- **`DELETE /deletar`**: Deleta uma apólice de seguro com base no seu ID.
