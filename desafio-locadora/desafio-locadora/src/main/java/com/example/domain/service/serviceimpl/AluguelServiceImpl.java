@@ -3,21 +3,25 @@ package com.example.domain.service.serviceimpl;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.example.api.dtos.AluguelRequestDTO;
-import com.example.domain.entity.ApoliceSeguroModel;
-import com.example.domain.entity.CarroModel;
-import com.example.domain.entity.MotoristaModel;
-import com.example.domain.repository.ApoliceSeguroRepository;
-import com.example.domain.repository.CarroRepository;
-import com.example.domain.repository.MotoristaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.api.dtos.AcessorioRequestDTO;
 import com.example.api.dtos.AluguelDTO;
+import com.example.api.dtos.AluguelRequestDTO;
 import com.example.api.mapper.AluguelMapper;
+import com.example.domain.entity.AcessorioModel;
 import com.example.domain.entity.AluguelModel;
+import com.example.domain.entity.ApoliceSeguroModel;
+import com.example.domain.entity.CarroModel;
+import com.example.domain.entity.MotoristaModel;
 import com.example.domain.repository.AluguelRepository;
+import com.example.domain.repository.ApoliceSeguroRepository;
+import com.example.domain.repository.CarroRepository;
+import com.example.domain.repository.MotoristaRepository;
 import com.example.domain.service.AluguelService;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class AluguelServiceImpl implements AluguelService {
@@ -36,7 +40,7 @@ public class AluguelServiceImpl implements AluguelService {
 
     @Autowired
     private ApoliceSeguroRepository apoliceRepository;
-
+    
     @Override
     public List<AluguelDTO> listarAlugueis() {
         List<AluguelModel> alugueis = aluguelRepository.findAll();
@@ -56,6 +60,7 @@ public class AluguelServiceImpl implements AluguelService {
     }
 
     @Override
+    @Transactional
     public AluguelModel contratoAluguel(AluguelRequestDTO data) {
         CarroModel carro = carroRepository.findByChassi(data.carro().getChassi())
                 .orElseThrow(() -> new RuntimeException("Carro não encontrado"));
@@ -78,6 +83,7 @@ public class AluguelServiceImpl implements AluguelService {
 
         return aluguelRepository.save(aluguel);
     }
+
 
     @Override
     public AluguelModel updateAluguel(Long id, AluguelRequestDTO data) {
