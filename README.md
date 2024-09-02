@@ -187,15 +187,15 @@ O `ApoliceSeguroController` expõe uma API REST que permite operações CRUD (Cr
 ## Documentação
 ### Swagger
 
-[Documentação em Swagger][http://localhost:8080/swagger-ui/index.html#/]
+[Documentação em Swagger](http://localhost:8080/swagger-ui/index.html#/)
 
 ## MySQL
 
 ### Altere dentro de application.properties seus valores para conexão do banco de dados
-- **`server.port=9090
-- **`spring.datasource.url=jdbc:mysql://localhost:3306/locadora-carros
-- **`spring.datasource.username=root
-- **`spring.datasource.password=123456789
+- **`server.port=9090`**
+- **`spring.datasource.url=jdbc:mysql://localhost:3306/locadora-carros`**
+- **`spring.datasource.username=root`**
+- **`spring.datasource.password=123456789`**
 
 
 
