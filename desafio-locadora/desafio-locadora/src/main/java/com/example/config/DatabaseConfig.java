@@ -63,13 +63,13 @@ public class DatabaseConfig {
             List<FabricanteModel> fabricanteEntities = cargaFabricante();
             List<ModeloCarroModel> modeloCarroEntities = cargaModeloCarro(fabricanteEntities);
 
-//            AcessorioModel arCondicionado = new AcessorioModel();
-//            arCondicionado.setAcessorios("Ar-condicionado");
-//            arCondicionado = acessorioRepository.save(arCondicionado); 
-//
-//            AcessorioModel direcaoHidraulica = new AcessorioModel();
-//            direcaoHidraulica.setAcessorios("Direção hidráulica");
-//            direcaoHidraulica = acessorioRepository.save(direcaoHidraulica); 
+            AcessorioModel arCondicionado = new AcessorioModel();
+            arCondicionado.setAcessorios("Ar-condicionado");
+            arCondicionado = acessorioRepository.save(arCondicionado); 
+
+            AcessorioModel direcaoHidraulica = new AcessorioModel();
+            direcaoHidraulica.setAcessorios("Direção hidráulica");
+            direcaoHidraulica = acessorioRepository.save(direcaoHidraulica); 
 
             CarroModel carro = new CarroModel();
             carro.setPlaca("ABC1234");
@@ -77,7 +77,7 @@ public class DatabaseConfig {
             carro.setChassi("534764");
             carro.setValorDiaria(new BigDecimal(123.0));
             carro.setModelo(modeloCarroEntities.get(0));
-//          carro.setAcessorios(Arrays.asList(arCondicionado, direcaoHidraulica));
+            carro.setAcessorios(Arrays.asList(arCondicionado, direcaoHidraulica));
             carroRepository.save(carro); 
 
             FuncionarioModel funcionario = new FuncionarioModel();
@@ -88,7 +88,6 @@ public class DatabaseConfig {
             funcionario.setNome("Sono");
             funcionarioRepository.save(funcionario);
 
-            // Create and save Motorista
             MotoristaModel motorista = new MotoristaModel();
             motorista.setNumeroCNH("1111111111");
             motorista.setCpf("22222222222");
@@ -97,32 +96,30 @@ public class DatabaseConfig {
             motorista.setNome("Batata");
             motoristaRepository.save(motorista);
 
-            // Create and save Carro 2
             CarroModel carro2 = new CarroModel();
             carro2.setPlaca("DEF5678");
             carro2.setCor("Vermelho");
             carro2.setChassi("5345432");
             carro2.setValorDiaria(new BigDecimal(100.0));
             carro2.setModelo(modeloCarroEntities.get(1));
-//          carro2.setAcessorios(Arrays.asList(arCondicionado, direcaoHidraulica));
+            carro2.setAcessorios(Arrays.asList(arCondicionado, direcaoHidraulica));
             carroRepository.save(carro2);
 
-            // ApoliceSeguroModel apolice = new ApoliceSeguroModel(1L, new BigDecimal(120), false, false, false, null);
-            // apoliceSeguroRepository.save(apolice);
+            ApoliceSeguroModel apolice = new ApoliceSeguroModel(new BigDecimal(120), false, false, false);
+            apoliceSeguroRepository.save(apolice);
 
             AluguelModel aluguel = new AluguelModel();
             aluguel.setCarro(carro);
             aluguel.setDataDevolucao(new Date());
             aluguel.setDataEntrega(new Date());
-            // aluguel.setApolice(apolice);
+            aluguel.setApolice(apolice);
             aluguel.setValorTotal(new BigDecimal(125));
             aluguel.setMotorista(motorista);
             Calendar c = Calendar.getInstance();
             aluguel.setDataPedido(c);
             aluguelRepository.save(aluguel);
 
-            //apolice.setAluguel(aluguel);
-            // apoliceSeguroRepository.save(apolice);
+            apolice.setAluguel(aluguel);
         };
     }
 
