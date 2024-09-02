@@ -1,22 +1,28 @@
 package com.example.domain.service.serviceimpl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.example.api.dtos.CarroDisponivelDTO;
-import com.example.domain.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.api.dtos.CarroDTO;
+import com.example.api.dtos.CarroDisponivelDTO;
 import com.example.api.dtos.CarroRequestDTO;
 import com.example.api.mapper.CarroMapper;
+import com.example.domain.entity.AcessorioModel;
+import com.example.domain.entity.CarroModel;
+import com.example.domain.entity.FabricanteModel;
+import com.example.domain.entity.ModeloCarroModel;
 import com.example.domain.enums.Categoria;
 import com.example.domain.repository.AcessorioRepository;
 import com.example.domain.repository.CarroRepository;
 import com.example.domain.repository.FabricanteRepository;
 import com.example.domain.repository.ModeloCarroRepository;
 import com.example.domain.service.CarroService;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class CarroServiceImpl implements CarroService {
@@ -70,14 +76,13 @@ public class CarroServiceImpl implements CarroService {
         return carroMapper.convertToCarroDTO(carro);
     }
 
+    @Override
     public List<CarroDTO> listarCarros() {
         List<CarroModel> carros = carroRepository.findAll();
         return carros.stream()
                 .map(carroMapper::convertToCarroDTO)
                 .collect(Collectors.toList());
     }
-
-
 
     @Override
     public List<CarroDTO> filtrarCarros(Categoria categoria, List<Long> acessoriosIds) {
@@ -107,8 +112,8 @@ public class CarroServiceImpl implements CarroService {
         }
 
     @Override
-    public CarroDTO atualizarCarro(CarroDTO carroDTO) {
-        CarroModel carroExistente = carroRepository.findByChassi(carroDTO.chassi())
+    public CarroDTO atualizarCarro(Long id, CarroDTO carroDTO) {
+        CarroModel carroExistente = carroRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Carro não encontrado com o chassi: " + carroDTO.chassi()));
 
         if(carroDTO.placa() != null) {
@@ -125,12 +130,15 @@ public class CarroServiceImpl implements CarroService {
     }
 
     @Override
-    public CarroDTO deletarPorChassi(CarroDTO carroDTO) {
-        CarroModel carroExistente = carroRepository.findByChassi(carroDTO.chassi())
-                .orElseThrow(() -> new RuntimeException("Carro não encontrado com o chassi: " + carroDTO.chassi()));
-        carroRepository.delete(carroExistente);
-        return carroMapper.convertToCarroDTO(carroExistente);
+    public void deletarPorId(Long id) {
+        if (carroRepository.findById(id).isEmpty()) {
+            throw new RuntimeException();
+        }
+
+        carroRepository.deleteById(id);
+
     }
+    
 }
 
 

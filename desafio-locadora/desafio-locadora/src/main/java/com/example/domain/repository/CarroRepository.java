@@ -1,7 +1,6 @@
 package com.example.domain.repository;
 
 import com.example.domain.entity.CarroModel;
-import com.example.domain.entity.MotoristaModel;
 import com.example.domain.enums.Categoria;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

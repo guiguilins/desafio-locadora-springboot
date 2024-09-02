@@ -1,4 +1,4 @@
- Desafio Locadora de Veículos - Spring Boot - Squad 10
+## Desafio Locadora de Veículos - Spring Boot - Squad 10
 
 **Desafio Locadora de Veículos**, desenvolvido pela **Squad 10** com o objetivo de criar uma aplicação completa de gerenciamento de locadora de veículos utilizando **Spring Boot**.
 
@@ -9,6 +9,7 @@
 - João Victor
 - Daniel
 - Samuel
+
 
 ## Estrutura do Projeto
 
@@ -176,7 +177,7 @@ A classe `ApoliceSeguroServiceImpl` implementa a interface `ApoliceSeguroService
 - **`updateApoliceSeguro`**: Atualiza uma apólice de seguro existente com base em seu ID.
 - **`deleteApoliceSeguro`**: Deleta uma apólice de seguro com base em seu ID.
 
-### 3. **Repositório (`ApoliceSeguroRepository`)**
+### **Repositório (`ApoliceSeguroRepository`)**
 
 O `ApoliceSeguroRepository` é uma interface que estende `JpaRepository` e permite a manipulação dos dados das apólices de seguro, como buscas e persistências.
 

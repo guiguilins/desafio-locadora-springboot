@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import com.example.api.dtos.ApoliceSeguroRequestDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
@@ -17,9 +18,16 @@ public class ApoliceSeguroModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull
     private BigDecimal valorFranquia;
+
+    @NotNull
     private boolean protecaoTerceiro;
+
+    @NotNull
     private boolean protecaoCausasNaturais;
+
+    @NotNull
     private boolean protecaoRoubo;
 
     @OneToOne(mappedBy = "apolice")

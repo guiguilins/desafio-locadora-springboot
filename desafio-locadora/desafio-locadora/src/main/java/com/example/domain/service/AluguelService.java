@@ -7,11 +7,11 @@ import com.example.api.dtos.AluguelRequestDTO;
 import com.example.domain.entity.AluguelModel;
 
 public interface AluguelService {
-    public List<AluguelDTO> listarAlugueis();
+    List<AluguelDTO> listarAlugueis();
 
-    public void deletarAluguel(Long id);
+    void deletarAluguel(Long id);
 
-    public AluguelModel contratoAluguel(AluguelRequestDTO data);
+    AluguelModel contratoAluguel(AluguelRequestDTO data);
 
-    public AluguelModel updateAluguel(Long id, AluguelRequestDTO data);
+    AluguelModel updateAluguel(Long id, AluguelRequestDTO data);
 }

@@ -36,12 +36,10 @@ public class CarroModel {
     @NotNull
     private BigDecimal valorDiaria;
 
-    @ManyToMany
-    @JoinTable(
-            name = "carro_acessorio",
-            joinColumns = @JoinColumn(name = "carro_id"),
-            inverseJoinColumns = @JoinColumn(name = "acessorio_id")
-    )
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "equipado", joinColumns = @JoinColumn(name = "carro_id", foreignKey = @ForeignKey(name
+            = "equipado_carro_id_fk")), inverseJoinColumns = @JoinColumn(name = "acessorio_id", foreignKey = @ForeignKey(name
+            = "equipado_acessorio_id_fk")))
     private List<AcessorioModel> acessorios = new ArrayList<>();
 
     @ManyToOne

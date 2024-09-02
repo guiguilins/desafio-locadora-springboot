@@ -3,8 +3,6 @@ package com.example.api.dtos;
 import com.example.domain.entity.PessoaModel;
 import com.example.domain.enums.Sexo;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 
