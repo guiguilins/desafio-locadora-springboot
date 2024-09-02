@@ -38,9 +38,9 @@ public class CarroModel {
 
     @ManyToMany
     @JoinTable(
-            name = "carro_acessorio",
-            joinColumns = @JoinColumn(name = "carro_id"),
-            inverseJoinColumns = @JoinColumn(name = "acessorio_id")
+        name = "carro_acessorio",
+        joinColumns = @JoinColumn(name = "carro_id"),
+        inverseJoinColumns = @JoinColumn(name = "acessorio_id")
     )
     private List<AcessorioModel> acessorios = new ArrayList<>();
 

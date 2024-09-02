@@ -1,12 +1,18 @@
 package com.example.api.dtos;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.example.domain.entity.AcessorioModel;
 import com.example.domain.entity.AluguelModel;
 import com.example.domain.entity.CarroModel;
 import com.example.domain.entity.ModeloCarroModel;
+import com.example.domain.repository.AcessorioRepository;
+import com.example.domain.repository.CarroRepository;
 
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.stream.Collectors;
+import jakarta.transaction.Transactional;
 
 public record CarroDTO(
         String placa,
@@ -26,4 +32,5 @@ public record CarroDTO(
                 carro.getModelo(),
                 carro.getAlugueis());
     }
+    
 }

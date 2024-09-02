@@ -6,8 +6,10 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -36,6 +38,7 @@ import com.example.domain.repository.MotoristaRepository;
 @Configuration
 @Profile("test")
 public class DatabaseConfig {
+
     @Autowired
     private FuncionarioRepository funcionarioRepository;
     @Autowired
@@ -52,25 +55,31 @@ public class DatabaseConfig {
     private ApoliceSeguroRepository apoliceSeguroRepository;
     @Autowired
     private AluguelRepository aluguelRepository;
-
+    
     @Bean
     public CommandLineRunner loadData() {
         return (args) -> {
-            
-            // Load Fabricantes and Modelos
+
             List<FabricanteModel> fabricanteEntities = cargaFabricante();
             List<ModeloCarroModel> modeloCarroEntities = cargaModeloCarro(fabricanteEntities);
 
-            // Create and save Acessorios
-            AcessorioModel arCondicionado = new AcessorioModel();
-            arCondicionado.setAcessorios("Ar-condicionado");
-            acessorioRepository.save(arCondicionado);  // Save to ensure it's persisted
+//            AcessorioModel arCondicionado = new AcessorioModel();
+//            arCondicionado.setAcessorios("Ar-condicionado");
+//            arCondicionado = acessorioRepository.save(arCondicionado); 
+//
+//            AcessorioModel direcaoHidraulica = new AcessorioModel();
+//            direcaoHidraulica.setAcessorios("Direção hidráulica");
+//            direcaoHidraulica = acessorioRepository.save(direcaoHidraulica); 
 
-            AcessorioModel direcaoHidraulica = new AcessorioModel();
-            direcaoHidraulica.setAcessorios("Direção hidráulica");
-            acessorioRepository.save(direcaoHidraulica);  // Save to ensure it's persisted
-            
-            // Create and save Funcionario
+            CarroModel carro = new CarroModel();
+            carro.setPlaca("ABC1234");
+            carro.setCor("Azul");
+            carro.setChassi("534764");
+            carro.setValorDiaria(new BigDecimal(123.0));
+            carro.setModelo(modeloCarroEntities.get(0));
+//          carro.setAcessorios(Arrays.asList(arCondicionado, direcaoHidraulica));
+            carroRepository.save(carro); 
+
             FuncionarioModel funcionario = new FuncionarioModel();
             funcionario.setMatricula("16099");
             funcionario.setCpf("11111111111");
@@ -78,7 +87,7 @@ public class DatabaseConfig {
             funcionario.setDataNascimento(new Timestamp(System.currentTimeMillis()));
             funcionario.setNome("Sono");
             funcionarioRepository.save(funcionario);
-            
+
             // Create and save Motorista
             MotoristaModel motorista = new MotoristaModel();
             motorista.setNumeroCNH("1111111111");
@@ -88,45 +97,32 @@ public class DatabaseConfig {
             motorista.setNome("Batata");
             motoristaRepository.save(motorista);
 
-            // Create and save Carro 1
-            CarroModel carro = new CarroModel();
-            carro.setPlaca("ABC1234");
-            carro.setCor("Azul");
-            carro.setChassi("534764");
-            carro.setValorDiaria(new BigDecimal(123.0));
-            carro.setAcessorios(Arrays.asList(arCondicionado, direcaoHidraulica));
-            carro.setModelo(modeloCarroEntities.get(0));
-            carroRepository.save(carro);
-
             // Create and save Carro 2
             CarroModel carro2 = new CarroModel();
             carro2.setPlaca("DEF5678");
             carro2.setCor("Vermelho");
             carro2.setChassi("5345432");
             carro2.setValorDiaria(new BigDecimal(100.0));
-            carro2.setAcessorios(Arrays.asList(arCondicionado, direcaoHidraulica));
             carro2.setModelo(modeloCarroEntities.get(1));
+//          carro2.setAcessorios(Arrays.asList(arCondicionado, direcaoHidraulica));
             carroRepository.save(carro2);
 
-            // Create and save ApoliceSeguro
-//            ApoliceSeguroModel apolice = new ApoliceSeguroModel(new BigDecimal(120), false, false, false);
-//            apoliceSeguroRepository.save(apolice);
-//
-//            // Create and save Aluguel
-//            AluguelModel aluguel = new AluguelModel();
-//            aluguel.setCarro(carro);
-//            aluguel.setDataDevolucao(new Date());
-//            aluguel.setDataEntrega(new Date());
-//            aluguel.setApolice(apolice);
-//            aluguel.setValorTotal(new BigDecimal(125));
-//            aluguel.setMotorista(motorista);
-//            Calendar c = Calendar.getInstance();
-//            aluguel.setDataPedido(c);
-//            aluguelRepository.save(aluguel);
+            // ApoliceSeguroModel apolice = new ApoliceSeguroModel(1L, new BigDecimal(120), false, false, false, null);
+            // apoliceSeguroRepository.save(apolice);
 
-            // Update ApoliceSeguro with Aluguel
-//            apolice.setAluguel(aluguel);
-//            apoliceSeguroRepository.save(apolice);
+            AluguelModel aluguel = new AluguelModel();
+            aluguel.setCarro(carro);
+            aluguel.setDataDevolucao(new Date());
+            aluguel.setDataEntrega(new Date());
+            // aluguel.setApolice(apolice);
+            aluguel.setValorTotal(new BigDecimal(125));
+            aluguel.setMotorista(motorista);
+            Calendar c = Calendar.getInstance();
+            aluguel.setDataPedido(c);
+            aluguelRepository.save(aluguel);
+
+            //apolice.setAluguel(aluguel);
+            // apoliceSeguroRepository.save(apolice);
         };
     }
 
@@ -144,7 +140,7 @@ public class DatabaseConfig {
             return modeloCarroRepository.save(modeloCarroModel);
         }).collect(Collectors.toList());
     }
-    
+
     private List<FabricanteModel> cargaFabricante() {
         return Arrays.asList("Honda", "Volkswagen").stream().map(fabricante -> {
             FabricanteModel fabricanteEntity = new FabricanteModel();
