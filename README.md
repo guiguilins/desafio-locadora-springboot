@@ -183,3 +183,7 @@ O `ApoliceSeguroController` expõe uma API REST que permite operações CRUD (Cr
 - **`POST /create`**: Cria uma nova apólice de seguro.
 - **`PUT /update`**: Atualiza uma apólice de seguro existente.
 - **`DELETE /deletar`**: Deleta uma apólice de seguro com base no seu ID.
+
+### Swagger
+
+[Documentação em Swagger][http://localhost:8080/swagger-ui/index.html#/]
