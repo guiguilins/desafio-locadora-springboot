@@ -183,3 +183,34 @@ O `ApoliceSeguroController` expõe uma API REST que permite operações CRUD (Cr
 - **`POST /create`**: Cria uma nova apólice de seguro.
 - **`PUT /update`**: Atualiza uma apólice de seguro existente.
 - **`DELETE /deletar`**: Deleta uma apólice de seguro com base no seu ID.
+
+
+Original file line number	Diff line number	Diff line change
+@@ -183,3 +183,7 @@ O `ApoliceSeguroController` expõe uma API REST que permite operações CRUD (Cr
+- **`POST /create`**: Cria uma nova apólice de seguro.
+- **`PUT /update`**: Atualiza uma apólice de seguro existente.
+- **`DELETE /deletar`**: Deleta uma apólice de seguro com base no seu ID.
+
+### Swagger
+
+[Documentação em Swagger][http://localhost:8080/swagger-ui/index.html#/]
+
+### Banco de dados
+Observações
+Para configurar as propriedades corretamente você deve:
+
+Renomear application.properties.example -> application.properties
+Altere dentro de application.properties seus valores para conexão do banco de dados
+url=jdbc:mysql://localhost:2111/locadora-carros
+username exemplo: carros
+password exemplo: x97gasdqa123
+
+E insira as informações que contém no arquivo run.sql pra gerar o banco de dados funcional e realizar o teste da aplicação
+
+### Docker
+#### Para iniciar o projeto utilizando o Docker, siga os passos abaixo:
+```
+git clone https://github.com/guiguilins/desafio-locadora-springboot.git
+docker-compose up -d
+or
+docker compose up -d
